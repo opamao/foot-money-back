@@ -19,4 +19,4 @@ Route::post('addEmailUser', [ApiUsersControllers::class, 'postAddEmailUser']);
 // Api joueur authentification
 Route::post('loginJoueur', [ApiJoueursControllers::class, 'postLoginJoueur']);
 Route::post('photoJoueur', [ApiJoueursControllers::class, 'postPhotoJoueur']);
-Route::post('addEmailJoueur', [ApiJoueursControllers::class, 'getAddEmailJoueur']);
+Route::post('addEmailJoueur', [ApiJoueursControllers::class, 'postAddEmailJoueur']);

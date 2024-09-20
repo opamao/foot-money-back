@@ -16,7 +16,7 @@ class ApiUsersControllers extends Controller
 
         $messages = [
             'login.required' => 'Votre numéro de téléphone est obligatoire.',
-            'login.min' => 'Votre numéro de téléphone doit être au moins 8 chiffres.',
+            'login.min' => 'Veuillez saisir au moins 8 caractères.',
         ];
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules, $messages);
@@ -27,7 +27,9 @@ class ApiUsersControllers extends Controller
             ], 422);
         }
 
-        $user = Utilisateurs::where('phone_user', $request->login)->first();
+        $user = Utilisateurs::where('phone_user', $request->login)
+        ->orWhere('email_user', $request->login)
+        ->first();
         if ($user) {
 
             return response()->json([
@@ -41,7 +43,7 @@ class ApiUsersControllers extends Controller
         } else {
 
             return response()->json([
-                'message' => "Vous n'avez pas de compte. Voulez-vous en créer"
+                'message' => "Vous n'avez pas de compte. Veuillez en créer"
             ], 401);
         }
     }

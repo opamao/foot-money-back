@@ -15,7 +15,7 @@ class ApiJoueursControllers extends Controller
 
         $messages = [
             'login.required' => 'Votre numéro de téléphone est obligatoire.',
-            'login.min' => 'Votre numéro de téléphone doit être au moins 8 chiffres.',
+            'login.min' => 'Veuillez saisir au moins 8 caractères.',
         ];
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules, $messages);
@@ -26,7 +26,9 @@ class ApiJoueursControllers extends Controller
             ], 422);
         }
 
-        $user = Joueurs::where('phone_joue', $request->login)->first();
+        $user = Joueurs::where('phone_joue', $request->login)
+            ->orWhere('email_joue', $request->login)
+            ->first();
         if ($user) {
 
             return response()->json(
