@@ -1,6 +1,6 @@
 @extends('layouts.master', [
-    'titre' => 'Details Clubs',
-    'title' => 'Détails Clubs',
+    'titre' => 'Stades',
+    'title' => 'Stades',
 ])
 
 @push('haut')
@@ -49,9 +49,9 @@
                                 <ul class="nav nav-tabs b-none">
                                     <li class="nav-item"><a class="nav-link active" id="grid-tab" data-toggle="tab"
                                             href="#grid"><i class="fa fa-th"></i>
-                                            Joueurs</a></li>
+                                            Stades</a></li>
                                     <li class="nav-item"><a class="nav-link" id="addnew-tab" data-toggle="tab"
-                                            href="#addnew"><i class="fa fa-plus"></i> Ajouter un joueur</a></li>
+                                            href="#addnew"><i class="fa fa-plus"></i> Ajouter stade</a></li>
                                 </ul>
                             </div>
                             <div class="row mt-2">
@@ -83,14 +83,13 @@
                                 </a>
                                 <div class="d-flex align-items-center px-2">
                                     <div>
-                                        <div>Nathan Guerrero</div>
-                                        <small class="d-block text-muted">Defenseur</small>
+                                        <div>Nom stade</div>
                                     </div>
                                     <div class="ml-auto text-muted">
-                                        <a href="javascript:void(0)" class="icon" title="Gains"><i
-                                                class="fe fe-heart mr-1"></i> 2 000 000 F</a>
-                                        <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"
-                                            title="Vote"><i class="fe fe-star mr-1"></i> 42</a>
+                                        <a href="javascript:void(0)" class="icon" title="Modifier"><i
+                                                class="fe fe-edit mr-1"></i></a>
+                                        <a href="javascript:void(0)" class="icon" title="Supprimer"><i
+                                                class="fe fe-trash mr-1"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -102,46 +101,22 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ajout d'un joueur</h3>
+                                    <h3 class="card-title">Ajout d'un stade</h3>
                                 </div>
                                 <form class="card-body" method="POST" action="#">
                                     @csrf
                                     <div class="row clearfix">
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nom</label>
-                                                <input required name="name" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Prénom</label>
-                                                <input required name="lastname" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Poste</label>
-                                                <input required name="poste" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Téléphone</label>
-                                                <input required name="phone" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input name="email" type="text" class="form-control">
+                                                <label>Libelle</label>
+                                                <input required name="libelle" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group mt-2 mb-3">
-                                                <input name="photo" type="file" class="dropify">
+                                                <input required name="photo" type="file" class="dropify">
                                                 <small id="fileHelp" class="form-text text-muted">Veuillez cliquer dans
-                                                    l'espace pour choisir la photo du joueur.</small>
+                                                    l'espace pour choisir la photo.</small>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

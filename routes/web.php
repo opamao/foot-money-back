@@ -17,6 +17,18 @@ Route::get('clubs', function () {
 Route::get('details-clubs', function () {
     return view('clubs.clubs-details');
 });
+Route::get('matchs', function () {
+    return view('matchs.matchs');
+});
+Route::get('news', function () {
+    return view('news.news');
+});
+Route::get('stades', function () {
+    return view('stades.stades');
+});
+Route::get('users', function () {
+    return view('users.users');
+});
 
 // Retour 404
 Route::fallback(function () {

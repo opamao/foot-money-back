@@ -1,6 +1,6 @@
 @extends('layouts.master', [
-    'titre' => 'Clubs',
-    'title' => 'Clubs',
+    'titre' => 'Matchs',
+    'title' => 'Matchs',
 ])
 
 @push('haut')
@@ -50,12 +50,9 @@
                                 <ul class="nav nav-tabs b-none">
                                     <li class="nav-item"><a class="nav-link active" id="list-tab" data-toggle="tab"
                                             href="#list"><i class="fa fa-list-ul"></i>
-                                            Liste</a></li>
-                                    <li class="nav-item"><a class="nav-link" id="grid-tab" data-toggle="tab"
-                                            href="#grid"><i class="fa fa-th"></i>
-                                            Présidents</a></li>
+                                            Liste de matchs</a></li>
                                     <li class="nav-item"><a class="nav-link" id="addnew-tab" data-toggle="tab"
-                                            href="#addnew"><i class="fa fa-plus"></i> Ajouter un club</a></li>
+                                            href="#addnew"><i class="fa fa-plus"></i> Ajouter un match</a></li>
                                 </ul>
                             </div>
                             <div class="row mt-2">
@@ -85,7 +82,7 @@
                                     <tbody>
                                         <tr class>
                                             <td class="width35 hidden-xs">
-                                                1
+                                                J1
                                             </td>
                                             <td class="text-center width40">
                                                 <div class="avatar d-block">
@@ -95,21 +92,24 @@
                                             </td>
                                             <td>
                                                 <div><a href="javascript:void(0);">Nom club</a></div>
-                                                <div class="text-muted">+264-625-2583</div>
-                                            </td>
-                                            <td class="hidden-xs">
-                                                <div class="text-muted">
-                                                    <a href="#" class="">adresse e-mail</a>
-                                                </div>
                                             </td>
                                             <td class="hidden-sm">
-                                                <div class="text-muted">
-                                                    situation géographique
+                                                <div class="text-muted text-center">
+                                                    Date <br>Heure
+                                                    <br>
+                                                    <a href="#" class="">Stade</a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"><a href="javascript:void(0);">Nom club</a></div>
+                                            </td>
+                                            <td class="text-center width40">
+                                                <div class="avatar d-block">
+                                                    <img class="avatar" src="../assets/images/xs/avatar4.jpg"
+                                                        alt="avatar">
                                                 </div>
                                             </td>
                                             <td class="text-right">
-                                                <a class="btn btn-sm btn-link" href="{{ url('details-clubs') }}"
-                                                    title="Détails"><i class="fa fa-eye"></i></a>
                                                 <button type="button" class="btn btn-sm btn-link hidden-xs"
                                                     data-bs-toggle="modal" data-bs-target="#delete" title="Supprimer"><i
                                                         class="fa fa-trash"></i></button>
@@ -143,121 +143,89 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="grid" role="tabpanel">
-                    <div class="row row-deck">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-status bg-blue"></div>
-                                    <div class="mb-3"> <img src="../assets/images/sm/avatar1.jpg"
-                                            class="rounded-circle w100" alt> </div>
-                                    <div class="mb-2">
-                                        <h5 class="mb-0">Paul Schmidt</h5>
-                                        <h5 class="mb-0">0585831647</h5>
-                                        <a href="#">theodoreyapi@gmail.com</a>
-                                    </div>
-                                </div>
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center px-2">
-                                        <img class="avatar avatar-md mr-3" src="../assets/images/xs/avatar1.jpg"
-                                            alt="">
-                                        <div>
-                                            <div>Club</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="tab-pane fade" id="addnew" role="tabpanel">
                     <div class="row clearfix">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ajout d'un club</h3>
+                                    <h3 class="card-title">Ajout de match</h3>
                                 </div>
                                 <form class="card-body" method="POST" action="#">
                                     @csrf
                                     <div class="row clearfix">
-                                        <div class="col-md-12 col-sm-12">
-                                            <h5>Information sur le club</h5>
+                                        <div class="col-md-3 col-sm-12">
+                                            <label>Journée</label>
+                                            <select name="journee" required class="form-control show-tick">
+                                                <option value="">-- Journée --</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                            </select>
                                         </div>
-                                        <br>
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-3 col-sm-12">
                                             <div class="form-group">
-                                                <label>Nom club</label>
-                                                <input required name="club" type="text" class="form-control">
+                                                <label>Date</label>
+                                                <input required name="Date" type="date" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-3 col-sm-12">
                                             <div class="form-group">
-                                                <label>Localité</label>
-                                                <input required name="localite" type="text" class="form-control">
+                                                <label>Heure</label>
+                                                <input required name="time" type="time" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Téléphone</label>
-                                                <input name="phone" type="number" class="form-control">
-                                            </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <label>Stade</label>
+                                            <select required name="stade" class="form-control show-tick">
+                                                <option value="">-- Stade --</option>
+                                                <option value="10">Male</option>
+                                                <option value="20">Female</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input type="email" name="emailclub" class="form-control">
-                                            </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <label>Club</label>
+                                            <select name="equipeOne" required class="form-control show-tick">
+                                                <option value="">-- Equipe1 --</option>
+                                                <option value="10">Male</option>
+                                                <option value="20">Female</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Site Web</label>
-                                                <input name="site" type="text" class="form-control">
-                                            </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <label>Club</label>
+                                            <select required name="equipeTwo" class="form-control show-tick">
+                                                <option value="">-- Equipe2 --</option>
+                                                <option value="10">Male</option>
+                                                <option value="20">Female</option>
+                                            </select>
                                         </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group mt-2 mb-3">
-                                                <input required name="logo" type="file" class="dropify">
-                                                <small id="fileHelp" class="form-text text-muted">Veuillez cliquer dans
-                                                    le cadre pour choisir le logo du club.</small>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="col-md-12 col-sm-12">
-                                            <h5>Information sur le président</h5>
-                                        </div>
-                                        <br>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Nom</label>
-                                                <input required name="president" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Téléphone</label>
-                                                <input name="phone" type="number" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input type="email" name="emailclub" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Site Web</label>
-                                                <input name="site" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group mt-2 mb-3">
-                                                <input name="image" type="file" class="dropify">
-                                                <small id="fileHelp" class="form-text text-muted">Veuillez cliquer dans
-                                                    le cadre pour choisir la photo du président.</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-12 mt-2">
                                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                                             <button type="reset" class="btn btn-outline-secondary">Annuler</button>
                                         </div>
