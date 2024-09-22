@@ -104,7 +104,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ajout d'un joueur</h3>
+                                    <h3 class="card-title">Ajout d'actualité</h3>
                                 </div>
                                 <form class="card-body" method="POST" action="#">
                                     @csrf
