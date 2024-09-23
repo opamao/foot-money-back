@@ -17,6 +17,14 @@ class Clubs extends Model
         'nom_club',
         'logo_club',
         'ville_club',
+        'phone_club',
+        'email_club',
+        'website_club',
+        'nom_respo_club',
+        'phone_respo_club',
+        'email_respo_club',
+        'website_respo_club',
+        'photo_respo_club',
     ];
 
     protected $table = 'clubs';

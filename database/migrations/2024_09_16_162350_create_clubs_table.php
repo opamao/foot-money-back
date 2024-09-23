@@ -16,6 +16,14 @@ return new class extends Migration
             $table->string('nom_club');
             $table->string('logo_club')->nullable();
             $table->string('ville_club');
+            $table->string('phone_club')->nullable();
+            $table->string('email_club')->nullable();
+            $table->string('website_club')->nullable();
+            $table->string('nom_respo_club');
+            $table->string('phone_respo_club')->nullable();
+            $table->string('email_respo_club')->nullable();
+            $table->string('website_respo_club')->nullable();
+            $table->string('photo_respo_club')->nullable();
             $table->timestamps();
         });
     }

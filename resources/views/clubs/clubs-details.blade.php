@@ -75,13 +75,10 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="grid" role="tabpanel">
                     <div class="row row-cards">
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-12 col-md-12">
                             <div class="card p-3">
-                                <a href="javascript:void(0)" class="mb-3">
-                                    <img src="../assets/images/gallery/1.jpg" alt="Photo by Nathan Guerrero"
-                                        class="rounded">
-                                </a>
                                 <div class="d-flex align-items-center px-2">
+                                    <img class="avatar avatar-md mr-3" src="../assets/images/xs/avatar1.jpg" alt="">
                                     <div>
                                         <div>Nathan Guerrero</div>
                                         <small class="d-block text-muted">Defenseur</small>
@@ -95,6 +92,33 @@
                                 </div>
                             </div>
                         </div>
+                        @forelse ($joueurs as $listJoueur)
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card p-3">
+                                    <a href="javascript:void(0)" class="mb-3">
+                                        <img src="../assets/images/gallery/1.jpg" alt="Photo by Nathan Guerrero"
+                                            class="rounded">
+                                    </a>
+                                    <div class="d-flex align-items-center px-2">
+                                        <div>
+                                            <div>Nathan Guerrero</div>
+                                            <small class="d-block text-muted">Defenseur</small>
+                                        </div>
+                                        <div class="ml-auto text-muted">
+                                            <a href="javascript:void(0)" class="icon" title="Gains"><i
+                                                    class="fe fe-heart mr-1"></i> 2 000 000 F</a>
+                                            <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"
+                                                title="Vote"><i class="fe fe-star mr-1"></i> 42</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <em>
+                                Le club n'a pas d'effectif. Vous pouvez cliquer sur <strong style="color: red;">Ajouter un
+                                    joueur</strong> au dessus...
+                            </em>
+                        @endforelse
                     </div>
                 </div>
                 <div class="tab-pane fade" id="addnew" role="tabpanel">
@@ -104,7 +128,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Ajout d'un joueur</h3>
                                 </div>
-                                <form class="card-body" method="POST" action="#">
+                                <form class="card-body" method="POST" action="#" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row clearfix">
                                         <div class="col-md-6 col-sm-12">

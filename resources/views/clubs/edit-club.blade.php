@@ -92,8 +92,7 @@
                                                 </td>
                                                 <td class="text-center width40">
                                                     <div class="avatar d-block">
-                                                        <img class="avatar"
-                                                            src="{{ asset('clubsequipe') . '/' . $listClub->logo_club }}"
+                                                        <img class="avatar" src="{{ asset('clubsequipe').'/'.$listClub->logo_club }}"
                                                             alt="avatar">
                                                     </div>
                                                 </td>
@@ -112,11 +111,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-right">
-                                                    <a class="btn btn-sm btn-link"
-                                                        href="{{ route('clubs.show', $listClub->id_club) }}"
-                                                        title="Détails"><i class="fa fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-link" href="{{ url('details-clubs') }}"
-                                                        title="Modifier"><i class="fa fa-edit"></i></a>
+                                                        title="Détails"><i class="fa fa-eye"></i></a>
                                                     <button type="button" class="btn btn-sm btn-link hidden-xs"
                                                         data-bs-toggle="modal" data-bs-target="#delete" title="Supprimer"><i
                                                             class="fa fa-trash"></i></button>
@@ -165,22 +161,20 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-status bg-blue"></div>
-                                        <div class="mb-3"> <img
-                                                src="{{ $listRespo->photo_respo_club == '' ? asset('assets/images/sm/avatar1.jpg') : asset('presis') . '/' . $listRespo->photo_respo_club }}"
+                                        <div class="mb-3"> <img src="../assets/images/sm/avatar1.jpg"
                                                 class="rounded-circle w100" alt> </div>
                                         <div class="mb-2">
-                                            <h5 class="mb-0">{{ $listRespo->nom_respo_club }}</h5>
-                                            <h5 class="mb-0">{{ $listRespo->phone_respo_club }}</h5>
-                                            <a href="#">{{ $listRespo->email_respo_club }}</a>
+                                            <h5 class="mb-0">Paul Schmidt</h5>
+                                            <h5 class="mb-0">0585831647</h5>
+                                            <a href="#">theodoreyapi@gmail.com</a>
                                         </div>
                                     </div>
                                     <div class="card-header">
                                         <div class="d-flex align-items-center px-2">
-                                            <img class="avatar avatar-md mr-3"
-                                                src="{{ asset('clubsequipe') . '/' . $listRespo->logo_club }}"
+                                            <img class="avatar avatar-md mr-3" src="../assets/images/xs/avatar1.jpg"
                                                 alt="">
                                             <div>
-                                                <div>{{ $listRespo->nom_club }}</div>
+                                                <div>Club</div>
                                             </div>
                                         </div>
                                     </div>
@@ -200,8 +194,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Ajout d'un club</h3>
                                 </div>
-                                <form class="card-body" method="POST" action="{{ route('clubs.store') }}"
-                                    enctype="multipart/form-data">
+                                <form class="card-body" method="POST" action="{{ route('clubs.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row clearfix">
                                         <div class="col-md-12 col-sm-12">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClubsControllers;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -10,9 +11,6 @@ Route::get('index', function () {
 });
 Route::get('forgot', function () {
     return view('auth.forgot-password');
-});
-Route::get('clubs', function () {
-    return view('clubs.clubs');
 });
 Route::get('details-clubs', function () {
     return view('clubs.clubs-details');
@@ -34,3 +32,5 @@ Route::get('users', function () {
 Route::fallback(function () {
     return view('errors.404');
 });
+
+Route::resource('clubs', ClubsControllers::class);
