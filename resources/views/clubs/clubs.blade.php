@@ -115,7 +115,7 @@
                                                     <a class="btn btn-sm btn-link"
                                                         href="{{ route('clubs.show', $listClub->id_club) }}"
                                                         title="Détails"><i class="fa fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-link" href="{{ url('details-clubs') }}"
+                                                    <a class="btn btn-sm btn-link" href="{{ route('clubs.edit', $listClub->id_club) }}"
                                                         title="Modifier"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-sm btn-link hidden-xs"
                                                         data-bs-toggle="modal" data-bs-target="#delete" title="Supprimer"><i

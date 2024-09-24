@@ -27,6 +27,9 @@ Route::get('stades', function () {
 Route::get('users', function () {
     return view('users.users');
 });
+Route::post('create-player', [ClubsControllers::class, 'createPlayer']);
+Route::post('update-player', [ClubsControllers::class, 'updatePlayer']);
+Route::post('delete-player', [ClubsControllers::class, 'deletePlayer']);
 
 // Retour 404
 Route::fallback(function () {

@@ -15,11 +15,13 @@ return new class extends Migration
             $table->uuid('id_joue')->primary();
             $table->string('nom_joue');
             $table->string('prenom_joue');
-            $table->string('naissance_joue');
+            $table->string('naissance_joue')->nullable();
             $table->string('poste_joue');
             $table->string('phone_joue', 50)->unique();
             $table->string('email_joue')->unique()->nullable();
             $table->string('photo_joue')->nullable();
+            $table->string('dossard_joue');
+            $table->string('password_joue');
             $table->uuid('club_id');
             $table->foreign('club_id')->references('id_club')->on('clubs');
             $table->timestamps();

@@ -14,7 +14,7 @@
 @if (session()->get('succes'))
     <div class="card border border-success">
         <div class="card-header bg-transparent border-success">
-            <h5 class="my-0 text-success"><i class="mdi mdi-check-all me-3"></i>
+            <h5 class="my-0" style="color: green"><i class="mdi mdi-check-all me-3"></i>
                 {{ session()->get('succes') }}
             </h5>
         </div>

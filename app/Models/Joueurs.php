@@ -21,6 +21,8 @@ class Joueurs extends Model
         'phone_joue',
         'email_joue',
         'photo_joue',
+        'dossard_joue',
+        'password_joue',
         'club_id',
     ];
 
