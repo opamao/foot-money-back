@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('prenom_user');
             $table->string('phone_user', 50)->unique();
             $table->string('email_user')->unique()->nullable();
-            $table->string('photo_user')->nullable();
+            $table->string('commune_user');
+            $table->string('password_user');
             $table->timestamps();
         });
     }

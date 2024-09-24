@@ -18,10 +18,12 @@ class Matchs extends Model
         'heure',
         'club_one_id',
         'club_two_id',
+        'stade_id',
+        'journee',
         'statut',
     ];
 
-    protected $table = 'utilisateurs';
+    protected $table = 'matchs';
 
     protected $primaryKey = 'id_match';
 }

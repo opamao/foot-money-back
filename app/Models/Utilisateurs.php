@@ -18,7 +18,8 @@ class Utilisateurs extends Model
         'prenom_user',
         'phone_user',
         'email_user',
-        'photo_user',
+        'commune_user',
+        'password_user',
     ];
 
     protected $table = 'utilisateurs';

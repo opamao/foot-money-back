@@ -15,13 +15,14 @@ return new class extends Migration
             $table->uuid('id_match')->primary();
             $table->date('debut');
             $table->time('heure');
+            $table->integer('journee');
             $table->uuid('club_one_id');
             $table->foreign('club_one_id')->references('id_club')->on('clubs');
             $table->uuid('club_two_id');
             $table->foreign('club_two_id')->references('id_club')->on('clubs');
             $table->uuid('stade_id');
             $table->foreign('stade_id')->references('id_stade')->on('stades');
-            $table->enum('statut', ['encours', 'termine']);
+            $table->enum('statut', ['encours', 'termine', 'reporter'])->default('encours');
             $table->timestamps();
         });
     }
