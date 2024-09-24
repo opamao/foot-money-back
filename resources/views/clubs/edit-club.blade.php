@@ -57,36 +57,36 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Nom club</label>
-                                    <input required name="club" type="text" class="form-control">
+                                    <input value="{{ $club->nom_club }}" required name="club" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Localité</label>
-                                    <input required name="localite" type="text" class="form-control">
+                                    <input value="{{ $club->ville_club }}" required name="localite" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input name="phone" type="number" class="form-control">
+                                    <input value="{{ $club->phone_club }}" name="phone" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input type="email" name="emailclub" class="form-control">
+                                    <input value="{{ $club->email_club }}" type="email" name="emailclub" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
                                     <label>Site Web</label>
-                                    <input name="site" type="text" class="form-control">
+                                    <input value="{{ $club->website_club }}" name="site" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group mt-2 mb-3">
-                                    <input required name="logo" type="file" class="dropify">
+                                    <input name="logo" type="file" class="dropify">
                                     <small id="fileHelp" class="form-text text-muted">Veuillez cliquer dans
                                         le cadre pour choisir le logo du club.</small>
                                 </div>
@@ -99,25 +99,25 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Nom</label>
-                                    <input required name="president" type="text" class="form-control">
+                                    <input value="{{ $club->nom_respo_club }}" required name="president" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Téléphone</label>
-                                    <input name="telephone" type="number" class="form-control">
+                                    <input value="{{ $club->phone_respo_club }}" name="telephone" type="number" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input type="email" name="emailrespo" class="form-control">
+                                    <input value="{{ $club->email_respo_club }}" type="email" name="emailrespo" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Site Web</label>
-                                    <input name="siterespo" type="text" class="form-control">
+                                    <input value="{{ $club->website_respo_club }}" name="siterespo" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-12">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stades;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class StadesControllers extends Controller
 {
@@ -11,7 +13,8 @@ class StadesControllers extends Controller
      */
     public function index()
     {
-        //
+        $stades = Stades::all();
+        return view('stades.stades', compact('stades'));
     }
 
     /**
@@ -27,7 +30,30 @@ class StadesControllers extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $roles = [
+            'libelle' => 'required',
+            'photo' => 'required|file',
+        ];
+        $customMessages = [
+            'libelle.required' => "Veuillez saisir le nom du stade.",
+            'photo.required|file' => "Veuillez sélectionner la photo du stade.",
+        ];
+        $request->validate($roles, $customMessages);
+
+        $fileStadeWithExtension = $request->file('photo')->getClientOriginalName();
+        $imageStade = 'photo_stade_' . time() . '_' . '.' . $fileStadeWithExtension;
+        $request->file('photo')->move(public_path('/stadeterrain'), $imageStade);
+
+        $stade = new Stades();
+        $stade->id_stade = Str::uuid();
+        $stade->libelle_stade = $request->libelle;
+        $stade->photo_stade = $imageStade;
+
+        if ($stade->save()) {
+            return back()->with('succes', $request->libelle . " a été ajouté");
+        } else {
+            return back()->withErrors("Impossible d'enregistrer " . $request->libelle . ". Veuillez reessayer!");
+        }
     }
 
     /**
@@ -51,7 +77,37 @@ class StadesControllers extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $roles = [
+            'libelle' => 'required',
+        ];
+        $customMessages = [
+            'libelle.required' => "Veuillez saisir le nom du stade.",
+        ];
+        $request->validate($roles, $customMessages);
+
+        $photoStade = $request->file('photo');
+        if ($photoStade !== null) {
+            $fileStadeWithExtension = $photoStade->getClientOriginalName();
+            $imageStade = 'photo_stade_' . time() . '_' . '.' . $fileStadeWithExtension;
+            $photoStade->move(public_path('/stadeterrain'), $imageStade);
+
+            Stades::where('id_stade', $id)
+                ->update(
+                    [
+                        'libelle_stade' => $request->libelle,
+                        'photo_stade' => $imageStade,
+                    ]
+                );
+        } else {
+            Stades::where('id_stade', $id)
+                ->update(
+                    [
+                        'libelle_stade' => $request->libelle,
+                    ]
+                );
+        }
+
+        return back()->with('succes', "La modification a été effectué");
     }
 
     /**
@@ -59,6 +115,8 @@ class StadesControllers extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Stades::findOrFail($id)->delete();
+
+        return back()->with('succes', "La suppression a été efecctué");
     }
 }

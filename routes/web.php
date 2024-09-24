@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubsControllers;
+use App\Http\Controllers\StadesControllers;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -21,9 +22,6 @@ Route::get('matchs', function () {
 Route::get('news', function () {
     return view('news.news');
 });
-Route::get('stades', function () {
-    return view('stades.stades');
-});
 Route::get('users', function () {
     return view('users.users');
 });
@@ -37,3 +35,4 @@ Route::fallback(function () {
 });
 
 Route::resource('clubs', ClubsControllers::class);
+Route::resource('stades', StadesControllers::class);

@@ -115,13 +115,15 @@
                                                     <a class="btn btn-sm btn-link"
                                                         href="{{ route('clubs.show', $listClub->id_club) }}"
                                                         title="Détails"><i class="fa fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-link" href="{{ route('clubs.edit', $listClub->id_club) }}"
+                                                    <a class="btn btn-sm btn-link"
+                                                        href="{{ route('clubs.edit', $listClub->id_club) }}"
                                                         title="Modifier"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-sm btn-link hidden-xs"
-                                                        data-bs-toggle="modal" data-bs-target="#delete" title="Supprimer"><i
-                                                            class="fa fa-trash"></i></button>
-                                                    <div class="modal fade" id="delete" data-bs-backdrop="static"
-                                                        data-bs-keyboard="false" tabindex="-1"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#delete{{ $listClub->id_club }}"
+                                                        title="Supprimer"><i class="fa fa-trash"></i></button>
+                                                    <div class="modal fade" id="delete{{ $listClub->id_club }}"
+                                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                                         aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
@@ -131,15 +133,21 @@
                                                                         Suppression
                                                                     </h5>
                                                                 </div>
-                                                                <div class="modal-body text-center">
-                                                                    Voulez-vous supprimer?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Annuler</button>
-                                                                    <button type="button"
-                                                                        class="btn btn-danger">Supprimer</button>
-                                                                </div>
+                                                                <form
+                                                                    action="{{ route('clubs.destroy', $listClub->id_club) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <div class="modal-body text-left">
+                                                                        Voulez-vous supprimer?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Annuler</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Supprimer</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>

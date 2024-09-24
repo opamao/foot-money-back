@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('club_one_id')->references('id_club')->on('clubs');
             $table->uuid('club_two_id');
             $table->foreign('club_two_id')->references('id_club')->on('clubs');
+            $table->uuid('stade_id');
+            $table->foreign('stade_id')->references('id_stade')->on('stades');
             $table->enum('statut', ['encours', 'termine']);
             $table->timestamps();
         });
@@ -31,9 +33,10 @@ return new class extends Migration
     {
         Schema::dropIfExists('matchs');
         Schema::table('matchs', function (Blueprint $table) {
-            $table->dropForeign(['club_one_id', 'club_two_id']);
+            $table->dropForeign(['club_one_id', 'club_two_id', 'stade_id']);
             $table->dropColumn('club_one_id');
             $table->dropColumn('club_two_id');
+            $table->dropColumn('stade_id');
         });
     }
 };

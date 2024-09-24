@@ -71,7 +71,6 @@ class ClubsControllers extends Controller
         $club->email_respo_club = $request->emailrespo;
         $club->website_respo_club = $request->siterespo;
         $club->photo_respo_club = $photoPresi === null ? "" : $imagePresi;
-        $club->save();
 
         if ($club->save()) {
             return back()->with('succes', $request->club . " a été ajouté");
@@ -107,28 +106,101 @@ class ClubsControllers extends Controller
     public function update(Request $request, string $id)
     {
         $roles = [
-            'nom' => 'required',
-            'prenom' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
+            'club' => 'required',
+            'localite' => 'required',
+            'president' => 'required',
         ];
         $customMessages = [
-            'nom.required' => "Veuillez saisir le nom",
-            'prenom.required' => "Veuillez saisir le prénom",
-            'phone.required' => "Veuillez saisir le téléphone",
-            'email.required' => "Veuillez saisir le email",
+            'club.required' => "Veuillez saisir le nom du club.",
+            'localite.required' => "Veuillez saisir la localité du club.",
+            'president.required' => "Veuillez saisir le nom du président.",
         ];
         $request->validate($roles, $customMessages);
 
-        Clubs::where('id', $id)
-            ->update(
-                [
-                    'name' => $request->nom,
-                    'email' => $request->email,
-                    'prenom' => $request->prenom,
-                    'phone' => $request->phone,
-                ]
-            );
+        $photoClub = $request->file('logo');
+        $photoPresi = $request->file('image');
+        if ($photoPresi !== null && $photoClub !== null) {
+
+            $fileClubWithExtension = $request->file('logo')->getClientOriginalName();
+            $imageClub = 'photo_club_' . time() . '_' . '.' . $fileClubWithExtension;
+            $request->file('logo')->move(public_path('/clubsequipe'), $imageClub);
+
+            $filePresiWithExtension = $photoPresi->getClientOriginalName();
+            $imagePresi = 'photo_presi_' . time() . '_' . '.' . $filePresiWithExtension;
+            $photoPresi->move(public_path('/presis'), $imagePresi);
+
+            Clubs::where('id_club', $id)
+                ->update(
+                    [
+                        'nom_club' => $request->club,
+                        'logo_club' => $imageClub,
+                        'ville_club' => $request->localite,
+                        'phone_club' => $request->phone,
+                        'email_club' => $request->emailclub,
+                        'website_club' => $request->site,
+                        'nom_respo_club' => $request->president,
+                        'phone_respo_club' => $request->telephone,
+                        'email_respo_club' => $request->emailrespo,
+                        'website_respo_club' => $request->siterespo,
+                        'photo_respo_club' => $imagePresi,
+                    ]
+                );
+        } elseif ($photoPresi !== null && $photoClub === null) {
+            $filePresiWithExtension = $photoPresi->getClientOriginalName();
+            $imagePresi = 'photo_presi_' . time() . '_' . '.' . $filePresiWithExtension;
+            $photoPresi->move(public_path('/presis'), $imagePresi);
+
+            Clubs::where('id_club', $id)
+                ->update(
+                    [
+                        'nom_club' => $request->club,
+                        'ville_club' => $request->localite,
+                        'phone_club' => $request->phone,
+                        'email_club' => $request->emailclub,
+                        'website_club' => $request->site,
+                        'nom_respo_club' => $request->president,
+                        'phone_respo_club' => $request->telephone,
+                        'email_respo_club' => $request->emailrespo,
+                        'website_respo_club' => $request->siterespo,
+                        'photo_respo_club' => $imagePresi,
+                    ]
+                );
+        } elseif ($photoPresi === null && $photoClub !== null) {
+            $fileClubWithExtension = $request->file('logo')->getClientOriginalName();
+            $imageClub = 'photo_club_' . time() . '_' . '.' . $fileClubWithExtension;
+            $request->file('logo')->move(public_path('/clubsequipe'), $imageClub);
+
+            Clubs::where('id_club', $id)
+                ->update(
+                    [
+                        'nom_club' => $request->club,
+                        'logo_club' => $imageClub,
+                        'ville_club' => $request->localite,
+                        'phone_club' => $request->phone,
+                        'email_club' => $request->emailclub,
+                        'website_club' => $request->site,
+                        'nom_respo_club' => $request->president,
+                        'phone_respo_club' => $request->telephone,
+                        'email_respo_club' => $request->emailrespo,
+                        'website_respo_club' => $request->siterespo,
+                    ]
+                );
+        } else {
+            Clubs::where('id_club', $id)
+                ->update(
+                    [
+                        'nom_club' => $request->club,
+                        'ville_club' => $request->localite,
+                        'phone_club' => $request->phone,
+                        'email_club' => $request->emailclub,
+                        'website_club' => $request->site,
+                        'nom_respo_club' => $request->president,
+                        'phone_respo_club' => $request->telephone,
+                        'email_respo_club' => $request->emailrespo,
+                        'website_respo_club' => $request->siterespo,
+                    ]
+                );
+        }
 
         return back()->with('succes', "La modification a été effectué");
     }
