@@ -133,7 +133,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-body text-left">
-                                                    <img src="{{ $listJoueur == '' ? asset('assets/images/gallery/1.jpg') : asset('photojoueur' . '/' . $listJoueur->photo_joue) }}"
+                                                    <img src="{{ $listJoueur->photo_joue == '' ? asset('assets/images/gallery/1.jpg') : asset('photojoueur' . '/' . $listJoueur->photo_joue) }}"
                                                         alt="" class="rounded">
                                                     <hr>
                                                     <div class="row">

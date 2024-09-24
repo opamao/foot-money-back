@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActualitesControllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClubsControllers;
 use App\Http\Controllers\StadesControllers;
@@ -19,9 +20,6 @@ Route::get('details-clubs', function () {
 Route::get('matchs', function () {
     return view('matchs.matchs');
 });
-Route::get('news', function () {
-    return view('news.news');
-});
 Route::get('users', function () {
     return view('users.users');
 });
@@ -35,4 +33,5 @@ Route::fallback(function () {
 });
 
 Route::resource('clubs', ClubsControllers::class);
+Route::resource('news', ActualitesControllers::class);
 Route::resource('stades', StadesControllers::class);

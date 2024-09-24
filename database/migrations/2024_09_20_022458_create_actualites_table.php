@@ -15,7 +15,8 @@ return new class extends Migration
             $table->uuid('id_news')->primary();
             $table->string('titre_news');
             $table->longText('contenu_news');
-            $table->integer('view_news');
+            $table->string('photo_news');
+            $table->integer('view_news')->default(0)->nullable();
             $table->timestamps();
         });
     }

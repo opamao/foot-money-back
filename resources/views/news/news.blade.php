@@ -6,6 +6,7 @@
 @push('haut')
     <link rel="stylesheet" href="{{ asset('') }}assets/plugins/sweetalert/sweetalert.css" />
     <link rel="stylesheet" href="{{ asset('') }}assets/plugins/dropify/css/dropify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @endpush
 @push('bas')
     <script src="{{ asset('') }}assets/bundles/sweetalert.bundle.js"></script>
@@ -70,33 +71,151 @@
             </div>
         </div>
     </div>
+    @include('layouts.status')
     <div class="section-body">
         <div class="container-fluid">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="grid" role="tabpanel">
                     <div class="row row-cards">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="card p-3">
-                                <a href="javascript:void(0)" class="mb-3">
-                                    <img src="../assets/images/gallery/1.jpg" alt="Photo by Nathan Guerrero"
-                                        class="rounded">
-                                </a>
-                                <div class="d-flex align-items-center px-2">
-                                    <div>
-                                        <div>Titre</div>
-                                        <small class="d-block text-muted">Date & heure</small>
-                                        <a href="javascript:void(0)" class="icon" title="Vues"><i
-                                                class="fe fe-eye mr-1"></i> 115</a>
+                        @forelse ($news as $list)
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card p-3">
+                                    <a href="javascript:void(0)" class="mb-3" data-bs-toggle="modal"
+                                        data-bs-target="#view{{ $list->id_news }}">
+                                        <img src="{{ $list->photo_news == '' ? asset('assets/images/gallery/1.jpg') : asset('actualites' . '/' . $list->photo_news) }}"
+                                            alt="" class="rounded">
+                                    </a>
+                                    <div class="modal fade" id="view{{ $list->id_news }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary text-white">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">
+                                                        Détails
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-body text-left">
+                                                    <img src="{{ $list->photo_news == '' ? asset('assets/images/gallery/1.jpg') : asset('actualites' . '/' . $list->photo_news) }}"
+                                                        alt="" class="rounded">
+                                                    <hr>
+                                                    <strong for="name">{{ $list->titre_news }}</strong>
+                                                    <p>{{ $list->contenu_news }}
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Compris</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="ml-auto text-muted">
-                                        <a href="javascript:void(0)" class="icon" title="Modifier"><i
-                                                class="fe fe-edit mr-1"></i></a>
-                                        <a href="javascript:void(0)" class="icon" title="Supprimer"><i
-                                                class="fe fe-trash mr-1"></i></a>
+                                    <div class="d-flex align-items-center px-2">
+                                        <div>
+                                            <div>{{ $list->titre_news }}</div>
+                                            <small class="d-block text-muted">{{ $list->created_at }}</small>
+                                            <a href="javascript:void(0)" class="icon" title="Vues"><i
+                                                    class="fe fe-eye mr-1"></i> {{ $list->view_news }}</a>
+                                        </div>
+                                        <div class="ml-auto text-muted">
+                                            <a href="javascript:void(0)" class="icon" title="Modifier"
+                                                data-bs-toggle="modal" data-bs-target="#edit{{ $list->id_news }}"><i
+                                                    class="fe fe-edit mr-1" style="color: blue"></i></a>
+                                            <div class="modal fade" id="edit{{ $list->id_news }}" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 800px;">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header text-white" style="background: blue;">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                                Modification
+                                                            </h5>
+                                                        </div>
+                                                        <form method="POST"
+                                                            action="{{ route('news.update', $list->id_news) }}"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <div class="modal-body text-left">
+                                                                <div class="row clearfix">
+                                                                    <div class="col-md-12 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <label>Titre</label>
+                                                                            <input value="{{ $list->titre_news }}"
+                                                                                required name="libelle" type="text"
+                                                                                class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group mt-3">
+                                                                            <label>Contenu</label>
+                                                                            <textarea required name="contenu" rows="4" class="form-control no-resize"
+                                                                                placeholder="Veuillez saisir la description...">{{ $list->contenu_news }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-group mt-2 mb-3">
+                                                                            <input name="photo" type="file"
+                                                                                class="dropify">
+                                                                            <small id="fileHelp"
+                                                                                class="form-text text-muted">Veuillez
+                                                                                cliquer dans
+                                                                                l'espace pour choisir la photo.</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Annuler</button>
+                                                                <button type="submit" class="btn btn-primary"
+                                                                    style="background: blue;">Modifier</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="javascript:void(0)" class="icon d-none d-md-inline-block ml-3"
+                                                title="Supprimer" data-bs-toggle="modal"
+                                                data-bs-target="#delete{{ $list->id_news }}"><i class="fe fe-trash mr-1"
+                                                    style="color: red"></i></a>
+                                            <div class="modal fade" id="delete{{ $list->id_news }}"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header text-white" style="background: red;">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                                Suppression
+                                                            </h5>
+                                                        </div>
+                                                        <form action="{{ route('news.destroy', $list->id_news) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-body text-left">
+                                                                Voulez-vous supprimer?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Annuler</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-danger">Supprimer</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @empty
+                            <em>
+                                Pas d'actualité disponible. Vous pouvez cliquer sur <strong style="color: red;">Ajouter
+                                    actualité</strong> au dessus...
+                            </em>
+                        @endforelse
                     </div>
                 </div>
                 <div class="tab-pane fade" id="addnew" role="tabpanel">
@@ -106,7 +225,8 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Ajout d'actualité</h3>
                                 </div>
-                                <form class="card-body" method="POST" action="#">
+                                <form class="card-body" method="POST" action="{{ route('news.store') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row clearfix">
                                         <div class="col-md-12 col-sm-12">
@@ -118,7 +238,8 @@
                                         <div class="col-sm-12">
                                             <div class="form-group mt-3">
                                                 <label>Contenu</label>
-                                                <textarea required name="contenu" rows="4" class="form-control no-resize" placeholder="Veuillez saisir la description..."></textarea>
+                                                <textarea required name="contenu" rows="4" class="form-control no-resize"
+                                                    placeholder="Veuillez saisir la description..."></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

@@ -96,7 +96,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-body text-left">
-                                                    <img src="{{ $list == '' ? asset('assets/images/gallery/1.jpg') : asset('stadeterrain' . '/' . $list->photo_stade) }}"
+                                                    <img src="{{ $list->photo_stade == '' ? asset('assets/images/gallery/1.jpg') : asset('stadeterrain' . '/' . $list->photo_stade) }}"
                                                         alt="" class="rounded">
                                                 </div>
                                                 <div class="modal-footer">
@@ -130,8 +130,6 @@
                                                             @csrf
                                                             @method('PATCH')
                                                             <div class="modal-body text-left">
-                                                                <input type="hidden" name="stade"
-                                                                    value="{{ $list->id_stade }}">
                                                                 <div class="row clearfix">
                                                                     <div class="col-md-12 col-sm-12">
                                                                         <div class="form-group">
