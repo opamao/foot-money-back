@@ -63,11 +63,11 @@ class ClubsControllers extends Controller
         $club->nom_club = $request->club;
         $club->logo_club = $imageClub;
         $club->ville_club = $request->localite;
-        $club->phone_club = "+225".$request->phone;
+        $club->phone_club = $request->phone !== null ? "+225".$request->phone : $request->phone;
         $club->email_club = $request->emailclub;
         $club->website_club = $request->site;
         $club->nom_respo_club = $request->president;
-        $club->phone_respo_club = "+225".$request->telephone;
+        $club->phone_respo_club = $request->telephone !== null ? "+225".$request->telephone : $request->telephone;
         $club->email_respo_club = $request->emailrespo;
         $club->website_respo_club = $request->siterespo;
         $club->photo_respo_club = $photoPresi === null ? "" : $imagePresi;

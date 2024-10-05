@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dotations', function (Blueprint $table) {
-            $table->ulid('id_dot')->primary();
+            $table->uuid('id_dot')->primary();
             $table->integer('montant_dot');
             $table->string('methode_paiement_dot');
             $table->uuid('utilisateur_id');

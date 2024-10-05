@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Utilisateurs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class ApiUsersControllers extends Controller
@@ -65,6 +66,16 @@ class ApiUsersControllers extends Controller
                 'message' => 'Votre numéro de téléphone est obligatoire.',
             ], 422);
         }
+        if (empty($request->password)) {
+            return response()->json([
+                'message' => 'Votre mot de passe est obligatoire.',
+            ], 422);
+        }
+        if (empty($request->commune)) {
+            return response()->json([
+                'message' => 'Votre commune est obligatoire.',
+            ], 422);
+        }
 
         $user = Utilisateurs::where('phone_user', $request->tel)->first();
         if ($user) {
@@ -88,6 +99,8 @@ class ApiUsersControllers extends Controller
         $utilisateur->prenom_user = $request->prenom;
         $utilisateur->phone_user = $request->tel;
         $utilisateur->email_user = $request->email ?? "";
+        $utilisateur->commune_user = $request->commune;
+        $utilisateur->password_user = Hash::make($request->password);
 
         if ($utilisateur->save()) {
             return response()->json([
