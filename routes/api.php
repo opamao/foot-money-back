@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiActualitesControllers;
 use App\Http\Controllers\ApiDonsControllers;
 use App\Http\Controllers\ApiJoueursControllers;
+use App\Http\Controllers\ApiMatchsControllers;
 use App\Http\Controllers\ApiUsersControllers;
 use App\Http\Controllers\ApiVotesControllers;
 use Illuminate\Http\Request;
@@ -31,3 +32,7 @@ Route::post('news', [ApiActualitesControllers::class, 'getAddNews']);
 Route::post('vote', [ApiVotesControllers::class, 'toggleVote']);
 Route::get('cumulVote/{match}', [ApiVotesControllers::class, 'cumulVote']);
 Route::post('dons', [ApiDonsControllers::class, 'makeDonation']);
+
+// Matchs
+Route::get('matchs', [ApiMatchsControllers::class,'getMatchs']);
+Route::get('players/{club}', [ApiMatchsControllers::class,'getPlayers']);

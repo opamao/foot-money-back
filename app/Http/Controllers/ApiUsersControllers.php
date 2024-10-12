@@ -12,24 +12,27 @@ class ApiUsersControllers extends Controller
     public function postLoginUser(Request $request)
     {
         $rules = [
-            'login' => 'required|min:8'
+            'login' => 'required|min:8',
+            'password' => 'required'
         ];
 
         $messages = [
             'login.required' => 'Votre numéro de téléphone est obligatoire.',
             'login.min' => 'Veuillez saisir au moins 8 caractères.',
+            'password.required' => 'Veuillez saisir votre mot de passe.',
         ];
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => $validator->errors()->first('login'),
+                'message' => $validator->errors(),
             ], 422);
         }
 
         $user = Utilisateurs::where('phone_user', $request->login)
         ->orWhere('email_user', $request->login)
+        ->where('password_user', $request->password)
         ->first();
         if ($user) {
 

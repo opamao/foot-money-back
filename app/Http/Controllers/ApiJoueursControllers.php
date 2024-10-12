@@ -10,12 +10,14 @@ class ApiJoueursControllers extends Controller
     public function postLoginJoueur(Request $request)
     {
         $rules = [
-            'login' => 'required|min:8'
+            'login' => 'required|min:8',
+            'password' => 'required'
         ];
 
         $messages = [
             'login.required' => 'Votre numéro de téléphone est obligatoire.',
             'login.min' => 'Veuillez saisir au moins 8 caractères.',
+            'password.required' => 'Veuillez saisir votre mot de passe.',
         ];
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules, $messages);
@@ -28,6 +30,7 @@ class ApiJoueursControllers extends Controller
 
         $user = Joueurs::where('phone_joue', $request->login)
             ->orWhere('email_joue', $request->login)
+            ->where('password_joue', $request->password)
             ->first();
         if ($user) {
 
