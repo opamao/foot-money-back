@@ -19,7 +19,7 @@ class ApiVotesControllers extends Controller
 
         if ($existingVote) {
             $existingVote->delete();
-            return response()->json(['message' => 'Vote annulé'], 200);
+            return response()->json(['message' => 'Vote annulé'], 201);
         } else {
 
             $votes = new Votes();
@@ -31,7 +31,10 @@ class ApiVotesControllers extends Controller
 
             if ($votes->save()) {
                 // On lui demande s'il veut faire un don, a la suite on déclanche l'api de don
-                return response()->json(['message' => 'Vote enregistré'], 200);
+                return response()->json([
+                    'joueur' => $request->joueur,
+                    'match' => $request->match,
+                ], 200);
             } else {
                 return response()->json([
                     'message' => "Problème lors du vote. Veuillez réessayer!",
@@ -45,11 +48,17 @@ class ApiVotesControllers extends Controller
         $topPlayers = Votes::join('joueurs', 'votes.joueur_id', '=', 'joueurs.id_joue')
             ->select('joueurs.nom_joue', DB::raw('SUM(votes.nombre_vote) as total_votes'))
             ->where('votes.match_id', $match)
-            ->groupBy('votes.joueur_id','joueurs.nom_joue')
+            ->groupBy('votes.joueur_id', 'joueurs.nom_joue')
             ->orderBy('total_votes', 'desc')
             ->limit(5)
             ->get();
 
-        return response()->json($topPlayers, 200);
+        $dataMap = [];
+
+        foreach ($topPlayers as $player) {
+            $dataMap[$player->nom_joue] = (float) $player->total_votes;
+        }
+
+        return response()->json($dataMap, 200);
     }
 }

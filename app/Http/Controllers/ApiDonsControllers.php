@@ -24,7 +24,7 @@ class ApiDonsControllers extends Controller
             return response()->json(['success' => "Votre don a été attribué au joueur."]);
         } else {
             return response()->json([
-                'message' => "Problème lors du vote. Veuillez réessayer!",
+                'message' => "Problème lors du don. Veuillez réessayer!",
             ], 401);
         }
 

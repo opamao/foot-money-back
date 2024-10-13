@@ -34,5 +34,6 @@ Route::get('cumulVote/{match}', [ApiVotesControllers::class, 'cumulVote']);
 Route::post('dons', [ApiDonsControllers::class, 'makeDonation']);
 
 // Matchs
-Route::get('matchs', [ApiMatchsControllers::class,'getMatchs']);
-Route::get('players/{club}', [ApiMatchsControllers::class,'getPlayers']);
+Route::get('matchs/{date}', [ApiMatchsControllers::class,'getMatchs']);
+Route::get('history/{date}', [ApiMatchsControllers::class,'getMatchs']);
+Route::get('players/{club}/{match}/{user}', [ApiMatchsControllers::class,'getPlayers']);
