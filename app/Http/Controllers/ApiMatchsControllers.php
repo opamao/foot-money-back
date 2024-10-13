@@ -74,13 +74,15 @@ class ApiMatchsControllers extends Controller
         return response()->json($players, 200);
     }
 
-    public function getHistory($date)
+    public function getHistory($user)
     {
         $matchs = Matchs::join('stades', 'matchs.stade_id', '=', 'stades.id_stade')
             ->join('clubs as club_one', 'matchs.club_one_id', '=', 'club_one.id_club')
             ->join('clubs as club_two', 'matchs.club_two_id', '=', 'club_two.id_club')
             // Sous-requête pour calculer le total des votes
             ->leftJoin(DB::raw('(SELECT match_id, SUM(nombre_vote) as total_votes FROM votes GROUP BY match_id) as votes'), 'matchs.id_match', '=', 'votes.match_id')
+            // Sous-requête pour vérifier si l'utilisateur a voté pour ce match
+            ->leftJoin(DB::raw("(SELECT match_id, COUNT(*) as user_voted FROM votes WHERE utilisateur_id = '$user' GROUP BY match_id) as user_votes"), 'matchs.id_match', '=', 'user_votes.match_id')
             ->select(
                 'stades.libelle_stade',
                 'club_one.nom_club as equipe_one',
@@ -88,9 +90,9 @@ class ApiMatchsControllers extends Controller
                 'club_two.nom_club as equipe_two',
                 'club_two.logo_club as equipe_two_logo',
                 'matchs.*',
-                DB::raw('IF(votes.total_votes > 15, "+15", votes.total_votes) as total_votes_display')
+                DB::raw('IF(votes.total_votes > 15, "+15", votes.total_votes) as total_votes_display'),
+                DB::raw('IF(user_votes.user_voted > 0, 1, 0) as user_has_voted') // 1 si l'utilisateur a voté, sinon 0
             )
-            ->whereDate('matchs.debut', '=', $date)
             ->get();
 
         $matchs->transform(function ($item) {
@@ -107,5 +109,6 @@ class ApiMatchsControllers extends Controller
         });
 
         return response()->json($matchs, 200);
+
     }
 }

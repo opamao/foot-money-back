@@ -35,5 +35,5 @@ Route::post('dons', [ApiDonsControllers::class, 'makeDonation']);
 
 // Matchs
 Route::get('matchs/{date}', [ApiMatchsControllers::class,'getMatchs']);
-Route::get('history/{date}', [ApiMatchsControllers::class,'getMatchs']);
+Route::get('history/{user}', [ApiMatchsControllers::class,'getHistory']);
 Route::get('players/{club}/{match}/{user}', [ApiMatchsControllers::class,'getPlayers']);
