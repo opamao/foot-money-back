@@ -101,7 +101,7 @@ class ApiUsersControllers extends Controller
         $utilisateur->nom_user = $request->nom;
         $utilisateur->prenom_user = $request->prenom;
         $utilisateur->phone_user = $request->tel;
-        $utilisateur->email_user = $request->email ?? "";
+        $utilisateur->email_user = $request->email;
         $utilisateur->commune_user = $request->commune;
         $utilisateur->password_user = Hash::make($request->password);
 
